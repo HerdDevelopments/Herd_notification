@@ -4,6 +4,7 @@ A modern, customizable notification system for FiveM with beautiful themes, soun
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![FiveM](https://img.shields.io/badge/FiveM-Ready-green.svg)
+<img width="1367" height="736" alt="notification" src="https://github.com/user-attachments/assets/9f662c95-0603-4dac-b5e1-97f4a62f028e" />
 
 ## ✨ Features
 
