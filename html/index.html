@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Herd Notifications</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="color" class="nui-hidden">
+    <div id="notifications-container"></div>
+    
+    <!-- Settings Panel -->
+    <div id="settings-panel" class="settings-panel hidden">
+        <div class="settings-content">
+            <div class="settings-header">
+                <div class="header-content">
+                    <div class="header-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M12 1v6m0 6v6m5.2-13.2l-4.2 4.2m0 6l4.2 4.2M23 12h-6m-6 0H1m18.2 5.2l-4.2-4.2m0-6l4.2-4.2"></path>
+                        </svg>
+                    </div>
+                    <div class="header-text">
+                        <h2>Notification Settings</h2>
+                        <p>Customize your notification experience</p>
+                    </div>
+                </div>
+                <button class="close-btn" onclick="closeSettings()">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="settings-body">
+                <!-- Theme Selection -->
+                <div class="setting-group">
+                    <div class="setting-header">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+                        </svg>
+                        <label class="setting-label">Theme Style</label>
+                    </div>
+                    <div class="theme-options">
+                        <button class="theme-btn" data-theme="color" onclick="selectTheme('color')">
+                            <div class="theme-preview-wrapper">
+                                <div class="theme-preview color-theme">
+                                    <div class="preview-dot dot-1"></div>
+                                    <div class="preview-dot dot-2"></div>
+                                    <div class="preview-dot dot-3"></div>
+                                </div>
+                                <div class="theme-check">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span>Colorful</span>
+                        </button>
+                        <button class="theme-btn" data-theme="dark" onclick="selectTheme('dark')">
+                            <div class="theme-preview-wrapper">
+                                <div class="theme-preview dark-theme">
+                                    <div class="preview-dot dot-1"></div>
+                                    <div class="preview-dot dot-2"></div>
+                                    <div class="preview-dot dot-3"></div>
+                                </div>
+                                <div class="theme-check">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span>Dark</span>
+                        </button>
+                        <button class="theme-btn" data-theme="light" onclick="selectTheme('light')">
+                            <div class="theme-preview-wrapper">
+                                <div class="theme-preview light-theme">
+                                    <div class="preview-dot dot-1"></div>
+                                    <div class="preview-dot dot-2"></div>
+                                    <div class="preview-dot dot-3"></div>
+                                </div>
+                                <div class="theme-check">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="20 6 9 17 4 12"></polyline>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span>Light</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Sound Toggle -->
+                <div class="setting-group">
+                    <div class="setting-header">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+                            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+                        </svg>
+                        <label class="setting-label">Sound Effects</label>
+                    </div>
+                    <div class="setting-card">
+                        <div class="card-content">
+                            <div class="card-info">
+                                <div class="card-title">Notification Sounds</div>
+                                <div class="card-description">Play audio when notifications appear</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="sound-toggle" onchange="toggleSound(this.checked)" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Position Adjustment -->
+                <div class="setting-group">
+                    <div class="setting-header">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                        <label class="setting-label">Notification Position</label>
+                    </div>
+                    <button class="adjust-position-btn" onclick="openPositionAdjuster()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="5 9 2 12 5 15"></polyline>
+                            <polyline points="9 5 12 2 15 5"></polyline>
+                            <polyline points="15 19 12 22 9 19"></polyline>
+                            <polyline points="19 9 22 12 19 15"></polyline>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <line x1="12" y1="2" x2="12" y2="22"></line>
+                        </svg>
+                        <span>Adjust Position</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Position Adjuster Grid -->
+    <div id="position-adjuster" class="position-adjuster hidden">
+        <div class="grid-overlay"></div>
+        <div id="draggable-preview" class="notification-preview">
+            <div class="notification success">
+                <div class="icon-container">
+                    <img src="icons/success.png" alt="Preview" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+                <div class="text-container">
+                    <div class="title">Preview Notification</div>
+                    <div class="message">Drag me anywhere to adjust position</div>
+                </div>
+            </div>
+        </div>
+        <div class="position-controls">
+            <button class="save-position-btn" onclick="savePosition()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Save Position
+            </button>
+            <button class="cancel-position-btn" onclick="cancelPositionAdjuster()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+                Cancel
+            </button>
+        </div>
+    </div>
+    
+    <audio id="notification-sound" src="sound/notification.mp3" preload="auto"></audio>
+    <script src="script.js"></script>
+</body>
+</html>
